@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rust Mobile Raid Calculator</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.svg">
+    <meta name="theme-color" content="#0d0d0d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Calculate resources needed to raid any base in Rust Mobile">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Splash / Loading Screen -->
+    <div id="splash">
+        <div class="splash-content">
+            <div class="splash-logo">
+                <span class="rust-icon">⚔️</span>
+                <h1>RAID CALC</h1>
+            </div>
+            <div class="splash-sub">RUST MOBILE</div>
+            <div class="splash-loader">
+                <div class="splash-bar"></div>
+            </div>
+            <div class="splash-version">v2.0.1</div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" style="display:none;">
+        <!-- Header -->
+        <header>
+            <div class="header-top">
+                <div class="header-icon">⚔️</div>
+                <div>
+                    <h1 class="header-title">RAID CALCULATOR</h1>
+                    <div class="header-sub">RUST MOBILE</div>
+                </div>
+                <button id="resetBtn" class="btn-icon" title="Reset All">
+                    <span>⟳</span>
+                </button>
+            </div>
+            <div class="status-bar">
+                <span id="totalSulfur">0</span> Sulfur
+                <span class="sep">|</span>
+                <span id="totalMetal">0</span> Metal
+                <span class="sep">|</span>
+                <span id="totalGP">0</span> GP
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Step 1: Select Wall Type -->
+            <section class="card" id="wallSection">
+                <div class="card-header">
+                    <span class="card-icon">🧱</span>
+                    <h2>1. TARGET WALL</h2>
+                </div>
+                <div class="wall-options">
+                    <button class="wall-btn" data-wall="wood" data-hp="250">
+                        <span class="wall-icon">🪵</span>
+                        <span class="wall-name">WOOD</span>
+                        <span class="wall-hp">250 HP</span>
+                    </button>
+                    <button class="wall-btn" data-wall="stone" data-hp="500">
+                        <span class="wall-icon">🪨</span>
+                        <span class="wall-name">STONE</span>
+                        <span class="wall-hp">500 HP</span>
+                    </button>
+                    <button class="wall-btn" data-wall="metal" data-hp="1000">
+                        <span class="wall-icon">🔩</span>
+                        <span class="wall-name">SHEET METAL</span>
+                        <span class="wall-hp">1000 HP</span>
+                    </button>
+                    <button class="wall-btn" data-wall="armored" data-hp="2000">
+                        <span class="wall-icon">🛡️</span>
+                        <span class="wall-name">ARMORED</span>
+                        <span class="wall-hp">2000 HP</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 2: Select Raid Tool -->
+            <section class="card" id="toolSection">
+                <div class="card-header">
+                    <span class="card-icon">💣</span>
+                    <h2>2. RAID TOOL</h2>
+                </div>
+                <div class="tool-list">
+                    <button class="tool-btn" data-tool="satchel">
+                        <span class="tool-icon">💼</span>
+                        <div class="tool-info">
+                            <span class="tool-name">Satchel Charge</span>
+                            <span class="tool-dmg">475 DMG</span>
+                        </div>
+                    </button>
+                    <button class="tool-btn" data-tool="c4">
+                        <span class="tool-icon">🧨</span>
+                        <div class="tool-info">
+                            <span class="tool-name">Timed Explosive (C4)</span>
+                            <span class="tool-dmg">550 DMG</span>
+                        </div>
+                    </button>
+                    <button class="tool-btn" data-tool="rocket">
+                        <span class="tool-icon">🚀</span>
+                        <div class="tool-info">
+                            <span class="tool-name">Rocket (RPG)</span>
+                            <span class="tool-dmg">350 DMG</span>
+                        </div>
+                    </button>
+                    <button class="tool-btn" data-tool="explosive">
+                        <span class="tool-icon">🔫</span>
+                        <div class="tool-info">
+                            <span class="tool-name">Explosive 5.56</span>
+                            <span class="tool-dmg">10 DMG</span>
+                        </div>
+                    </button>
+                    <button class="tool-btn" data-tool="handmade">
+                        <span class="tool-icon">🏹</span>
+                        <div class="tool-info">
+                            <span class="tool-name">Handmade Shell</span>
+                            <span class="tool-dmg">5 DMG</span>
+                        </div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="card" id="resultsSection" style="display:none;">
+                <div class="card-header">
+                    <span class="card-icon">📊</span>
+                    <h2>3. RAID RESULTS</h2>
+                </div>
+                <div id="resultContent"></div>
+            </section>
+
+            <!-- Comparison Section -->
+            <section class="card" id="comparisonSection">
+                <div class="card-header">
+                    <span class="card-icon">📋</span>
+                    <h2>ALL METHODS COMPARISON</h2>
+                </div>
+                <div id="comparisonContent">
+                    <p class="text-muted">Select a wall type to see all raid methods.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <span>Rust Mobile Raid Calculator</span>
+                <span class="sep">•</span>
+                <span>Data for wipe</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

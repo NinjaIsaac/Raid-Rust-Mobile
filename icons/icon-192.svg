@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="32" fill="#0d0d0d"/>
+  <rect x="8" y="8" width="176" height="176" rx="28" fill="none" stroke="#d47b28" stroke-width="4"/>
+  <text x="96" y="70" text-anchor="middle" font-size="60" fill="#d47b28">⚔️</text>
+  <text x="96" y="130" text-anchor="middle" font-family="Rajdhani,sans-serif" font-weight="700" font-size="36" fill="#d47b28" letter-spacing="2">RAID</text>
+  <text x="96" y="160" text-anchor="middle" font-family="Rajdhani,sans-serif" font-weight="500" font-size="16" fill="#8a7e6b" letter-spacing="4">CALC</text>
+</svg>
+
